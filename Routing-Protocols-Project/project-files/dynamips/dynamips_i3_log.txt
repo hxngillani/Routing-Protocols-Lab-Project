@@ -1,0 +1,12 @@
+Dec 19 12:30:33.498 HYPERVISOR: Release 0.2.17-x86/Windows (tag 2017072410)
+Dec 19 12:30:33.498 HYPERVISOR: Started on IP = localhost, TCP port = 50379.
+Dec 19 12:30:33.989 HYPERVISOR: exec_cmd: hypervisor version 
+Dec 19 12:30:33.990 HYPERVISOR: exec_cmd: hypervisor working_dir D:\Routing Protocols\Routing-Protocols-Project\project-files\dynamips 
+Dec 19 12:30:33.990 GENERAL: working_dir=D:\Routing Protocols\Routing-Protocols-Project\project-files\dynamips
+Dec 19 12:30:33.990 HYPERVISOR: exec_cmd: ethsw create LAN5 
+Dec 19 12:30:35.411 HYPERVISOR: exec_cmd: nio create_udp udp-9ccad9b7-8906-49a2-bbac-cbe4d3774ad2 10013 127.0.0.1 10012 
+Dec 19 12:30:35.411 HYPERVISOR: exec_cmd: ethsw add_nio LAN5 udp-9ccad9b7-8906-49a2-bbac-cbe4d3774ad2 
+Dec 19 12:30:35.423 HYPERVISOR: exec_cmd: ethsw set_access_port LAN5 udp-9ccad9b7-8906-49a2-bbac-cbe4d3774ad2 1 
+Dec 19 12:30:35.451 HYPERVISOR: exec_cmd: nio create_udp udp-3241b888-2515-4601-bc70-a1856c919df0 10014 127.0.0.1 10015 
+Dec 19 12:30:35.451 HYPERVISOR: exec_cmd: ethsw add_nio LAN5 udp-3241b888-2515-4601-bc70-a1856c919df0 
+Dec 19 12:30:35.464 HYPERVISOR: exec_cmd: ethsw set_access_port LAN5 udp-3241b888-2515-4601-bc70-a1856c919df0 1 

@@ -1,0 +1,3 @@
+set pcname Researcher
+ip 172.18.1.3 172.18.1.1 24
+ip dns 172.18.1.1

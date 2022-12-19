@@ -1,0 +1,7 @@
+ip 172.18.2.2/24 172.18.2.1
+ip dns 172.18.2.1
+save researcher1
+show ip
+save r2
+quir
+quit

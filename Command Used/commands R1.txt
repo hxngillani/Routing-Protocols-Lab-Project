@@ -1,0 +1,67 @@
+edit
+load factory-default 
+set system root-authentication plain-text-password set it lab123
+commit
+exit
+request system reboot
+yes
+
+login as root and password lab123
+
+delete security
+set security forwarding-options family mpls mode packet-based
+commit
+
+edit
+	
+set system time-zone Europe/Rome
+run set date 20221217hhmm.ss
+
+
+
+set system services telnet 
+set system services ssh
+set system login user hassan class super-user
+set system login user hassan authentication plain-text-password set it lab 123
+
+
+
+edit system login
+
+set class juniper permissions [view view-configuration reset]
+set user intern class juniper
+
+
+set user guest class read-only 
+set user guest authentication plain-text-password  set it lab 123
+
+
+
+
+setting interfaces
+
+
+set interfaces R1
+
+set interfaces ge-0/0/1 unit 0 family inet address 172.18.1.1/24
+set interfaces ge-0/0/2 unit 0 family inet address 172.18.0.1/30
+set interfaces ge-0/0/3 unit 0 family inet address 172.18.2.1/24
+set interfaces lo0 unit 0 family inet address 192.168.1.1/32
+
+
+
+
+set ip of researcher vpc
+
+ip 172.18.1.3/24 172.18.1.1
+
+ip dns 172.18.1.1
+
+
+
+
+set ip of Researcr1 vpc
+
+ip 172.18.2.2/24 172.18.2.1
+
+ip dns 172.18.2.1

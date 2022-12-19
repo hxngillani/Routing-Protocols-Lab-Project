@@ -1,0 +1,38 @@
+R3
+
+enable 
+conf t
+exit
+
+write t to show config
+
+
+write mem to apply and save chnages 
+
+conf t 
+
+interface fastEthernet 0/0
+ip address 172.18.0.6 255.255.255.252
+no shutdown
+
+
+interface fastEthernet 0/1
+ip address 172.18.3.1 255.255.255.0
+no shutdown
+
+
+interface lo0
+ip address 192.168.1.3 255.255.255.255
+no shutdown
+
+exit from config 
+and then 
+write mem
+
+
+
+set ip of Reseacher3 vpc
+
+ip 172.18.3.2/24 172.18.3.1
+
+ip dns 172.18.3.1

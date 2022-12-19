@@ -1,0 +1,10 @@
+ip
+show ip
+ip 172.18.1.3/24 172.18.1.1
+ip dns 172.18.1.1
+ping 172.18.1.1
+?
+save researcher
+show ip
+save r1
+quit

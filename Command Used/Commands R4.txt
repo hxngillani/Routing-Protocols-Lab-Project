@@ -1,0 +1,36 @@
+R4
+
+enable 
+conf t
+exit
+
+write t to show config
+
+
+write mem to apply and save chnages 
+
+conf t 
+
+interface fastEthernet 0/0
+ip address 172.18.0.10 255.255.255.252
+no shutdown
+
+
+interface fastEthernet 0/1
+ip address 172.18.4.1 255.255.255.0
+no shutdown
+
+interface lo0
+ip address 192.168.1.4 255.255.255.255
+no shutdown
+
+exit from config 
+and then 
+write mem
+
+
+set ip of Sales vpc
+
+ip 172.18.4.2/24 172.18.4.1
+
+ip dns 172.18.4.1

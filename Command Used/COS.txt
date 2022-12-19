@@ -1,0 +1,147 @@
+
+----------------------------------------------------------------
+show class-of-service forwarding-class
+
+edit class-of-service forwarding-classes
+set queue 1 research
+set queue 2 sales
+
+up 2
+
+edit schedulers best-effort-sched
+set buffer-size percent 75
+set transmit-rate percent 75
+set priority low
+
+up 2
+
+
+edit schedulers research-sched
+set buffer-size percent 10
+set transmit-rate percent 10
+set priority high
+
+up 2
+
+edit schedulers sales-sched
+set buffer-size percent 10
+set transmit-rate percent 10
+set priority medium-low
+
+up 2
+
+edit schedulers network-control-sched
+set buffer-size percent 5
+set transmit-rate percent 5
+set priority medium-high
+
+
+up 2
+
+edit scheduler-maps my-sched-map
+set forwarding-class best-effort scheduler best-effort-sched
+set forwarding-class research scheduler research-sched
+set forwarding-class sales scheduler sales-sched
+set forwarding-class network-control scheduler network-control-sched
+
+--------------------------------------------------------------------------------
+
+
+For R1
+
+edit class-of-service interfaces
+set ge-0/0/1 scheduler-map my-sched-map
+set ge-0/0/2 scheduler-map my-sched-map
+set ge-0/0/3 scheduler-map my-sched-map
+
+top
+edit firewall family inet filter classify-traffic
+
+set term researcher1 from source-adrdress 172.18.1.3
+set term researcher1 from destination-address 172.18.3.0/24
+set term researcher1 then forwarding-class research
+set term researcher1 then accept
+
+set term researcher2 from source-address 172.18.2.0/24
+set term researcher2 from destination-address  172.18.3.0/24
+set term researcher2 then forwarding-class research
+set term researcher2 then accept
+
+
+set term sales from destination-address 172.18.4.0/24
+set term sales then forwarding-class sales
+set term sales then accept
+
+set term accept-all then accept
+
+top edit interfaces ge-0/0/1
+
+set unit 0 family inet filter input classify-traffic
+
+
+top edit interfaces ge-0/0/3
+
+set unit 0 family inet filter input classify-traffic
+
+
+For R2
+
+edit class-of-service interfaces
+set ge-0/0/1 scheduler-map my-sched-map
+set ge-0/0/2 scheduler-map my-sched-map
+set ge-0/0/3 scheduler-map my-sched-map
+set ge-0/0/4 scheduler-map my-sched-map
+
+edit firewall family inet filter classify-traffic
+
+set term sales from source-address 172.18.4.0/24
+set term sales then forwarding-class sales
+set term sales then accept
+
+set term researcher3 from source-address 172.18.3.0/24
+set term researcher3 from destination-address 172.18.1.3
+set term researcher3 from destination-address 172.18.2.0/24
+set term researcher3 then forwarding-class research
+set term researcher3 then accept
+
+
+set term accept-all then accept
+
+
+
+
+top edit interfaces ge-0/0/1
+set unit 0 family inet filter input classify-traffic
+
+top edit interfaces ge-0/0/3
+
+set unit 0 family inet filter input classify-traffic
+
+
+-------------------------------------------------------------------------------
+
+Testing
+
+R2
+clear interfaces statistics all
+
+show interfaces queue ge-0/0/1
+
+ping from Researcher3 
+
+
+show interfaces queue ge-0/0/3
+
+ping from sales
+
+
+
+
+
+
+Help
+-----------------------------------------------------
+to delete filter from interface
+delete interfaces ge-0/0/1 unit 0 family inet filter input classify-traffic
+
+
